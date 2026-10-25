@@ -22,13 +22,6 @@ async def lifespan(app: FastAPI):
     os.chmod(ROUTER_BIN, 0o755)
     _router_proc = subprocess.Popen([str(ROUTER_BIN)])
     yield
-    if _router_proc is not None:
-        _router_proc.terminate()
-        try:
-            _router_proc.wait(timeout=10)
-        except subprocess.TimeoutExpired:
-            _router_proc.kill()
-        _router_proc = None
 
 
 app = FastAPI(title="I2PChat", lifespan=lifespan)
