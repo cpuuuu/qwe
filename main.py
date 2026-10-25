@@ -1,26 +1,31 @@
-from contextlib import asynccontextmanager
-from pathlib import Path
 import os
 import subprocess
+from pathlib import Path
+
+BASE_DIR = Path(__file__).parent
+ROUTER_BIN = BASE_DIR / "assets" / "i2p-router"
+
+os.chmod(ROUTER_BIN, 0o755)
+_router_proc = subprocess.Popen([str(ROUTER_BIN)])
+
+from contextlib import asynccontextmanager
+import sys
 
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-BASE_DIR = Path(__file__).parent
-
 ROUTER_WS_URL = "ws://127.0.0.1:9098"
-ROUTER_BIN = BASE_DIR / "assets" / "i2p-router"
 
-_router_proc: subprocess.Popen | None = None
+
+def install_requirements():
+    req = BASE_DIR / "requirements.txt"
+    subprocess.run([sys.executable, "-m", "pip", "install", "-r", str(req)])
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    global _router_proc
-    os.chmod(ROUTER_BIN, 0o755)
-    _router_proc = subprocess.Popen([str(ROUTER_BIN)])
     yield
 
 
@@ -40,3 +45,10 @@ def index(request: Request):
 def health():
     running = _router_proc is not None and _router_proc.poll() is None
     return {"status": "ok", "router_ws": ROUTER_WS_URL, "router_running": running}
+
+
+if __name__ == "__main__":
+    install_requirements()
+    import uvicorn
+
+    uvicorn.run("main:app", host="127.0.0.1", port=8000)
