@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>I2PChat — Anonymous Chat over I2P</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body data-router-ws="{{ router_ws_url }}">
+  <div class="app">
+    <header class="header">
+      <div>
+        <h1>🟣 I2PChat</h1>
+        <p class="subtitle">Anonymous chat routed through your I2P router</p>
+      </div>
+      <div class="status-dot" id="conn-status"><span class="dot" id="conn-dot"></span> <span id="conn-text">Connecting…</span></div>
+    </header>
+
+    <div class="routerbar">
+      <span>Router: <code id="router-url">ws://127.0.0.1:9098</code></span>
+      <span class="sep">•</span>
+      <span>Latency: <b id="latency">—</b></span>
+      <span class="sep">•</span>
+      <span>Tunnels: <b id="tunnels">—</b></span>
+      <button id="reconnect-btn" type="button">Reconnect</button>
+    </div>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <h2>Peers</h2>
+        <ul id="peers">
+          <li><span class="dot small dim"></span> <i>waiting for router…</i></li>
+        </ul>
+        <h2>Channels</h2>
+        <ul id="channels">
+          <li class="active"># general</li>
+          <li># help</li>
+          <li># random</li>
+        </ul>
+        <div class="nick-box">
+          <label for="nick-input">Nickname</label>
+          <input id="nick-input" type="text" value="anon" maxlength="24" />
+        </div>
+      </aside>
+
+      <main class="chat">
+        <div id="messages" class="messages"></div>
+
+        <form id="chat-form" class="input-row">
+          <input id="chat-input" type="text" placeholder="Message #general… (Enter to send)" autocomplete="off" />
+          <button type="submit">Send</button>
+        </form>
+        <p class="hint">Connected to the I2P router websocket at <code>ws://127.0.0.1:9098</code>. Events: hello, message, peer-join, peer-leave, typing, error.</p>
+      </main>
+    </div>
+  </div>
+  <script src="/static/app.js"></script>
+</body>
+</html>

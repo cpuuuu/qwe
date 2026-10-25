@@ -1,0 +1,35 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, sans-serif; background: #101014; color: #e8e8ef; }
+.app { max-width: 960px; margin: 0 auto; padding: 16px; }
+.header { display: flex; justify-content: space-between; align-items: center; }
+.header h1 { margin: 0; font-size: 1.6rem; }
+.subtitle { margin: 4px 0 0; color: #a9a9c0; }
+.status-dot { background: #1e1e2a; border: 1px solid #444; padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; }
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #9d4edd; margin-right: 6px; }
+.dot.small { width: 8px; height: 8px; }
+.dot.dim { background: #555; }
+.banner { background: #241b3a; border: 1px solid #9d4edd; padding: 10px 14px; border-radius: 8px; margin: 12px 0; }
+.routerbar { display: flex; align-items: center; gap: 8px; background: #17171f; border: 1px solid #333; padding: 8px 12px; border-radius: 8px; margin: 12px 0; font-size: 0.85rem; flex-wrap: wrap; }
+.routerbar code { color: #9d4edd; }
+.routerbar .sep { color: #555; }
+.routerbar button { margin-left: auto; padding: 6px 12px; border-radius: 6px; border: 1px solid #555; background: #24242f; color: #eee; cursor: pointer; }
+.layout { display: grid; grid-template-columns: 220px 1fr; gap: 12px; }
+.sidebar { background: #17171f; border-radius: 8px; padding: 12px; }
+.sidebar h2 { font-size: 0.9rem; color: #a9a9c0; margin: 12px 0 6px; }
+.sidebar ul { list-style: none; padding: 0; margin: 0; }
+.sidebar li { padding: 6px 8px; border-radius: 6px; }
+.sidebar li.active { background: #241b3a; }
+.chat { background: #17171f; border-radius: 8px; padding: 12px; display: flex; flex-direction: column; }
+.messages { flex: 1; min-height: 300px; max-height: 420px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
+.msg { background: #1f1f2b; padding: 8px 10px; border-radius: 6px; }
+.msg.sys { background: #1a2433; color: #9fc1ff; }
+.msg.err { color: #ff8a8a; }
+.msg.mine { border-left: 3px solid #9d4edd; }
+.input-row { display: flex; gap: 8px; margin-top: 10px; }
+.input-row input { flex: 1; padding: 10px; border-radius: 6px; border: 1px solid #444; background: #101018; color: white; }
+.input-row button { padding: 10px 16px; border-radius: 6px; border: none; background: #9d4edd; color: white; cursor: pointer; }
+.hint { color: #777; font-size: 0.8rem; }
+.nick-box { margin-top: 14px; display: flex; flex-direction: column; gap: 4px; }
+.nick-box label { font-size: 0.8rem; color: #a9a9c0; }
+.nick-box input { padding: 8px; border-radius: 6px; border: 1px solid #444; background: #101018; color: white; }
+@media (max-width: 700px) { .layout { grid-template-columns: 1fr; } }
